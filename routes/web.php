@@ -11,7 +11,7 @@ Route::get('/', function () {
 //     return "<h1>Welcome To About Page</H1>";
 // });
 
-Route::view('/contact','contact');
+Route::view('/contact','pages.contact');
 
 Route::get('/contact/admin',function(){
     return view('about');
@@ -25,9 +25,9 @@ Route::get('/user/{user_id?}/{user_name?}',function( $id=null,$name=null){
     }
 })->whereNumber('user_id')->whereAlpha('user_name');
 
-Route::get('/about-us',function(){
-    // return view('about');
-    return "<h1>Welcome To About Page</H1>";
+Route::get('/about',function(){
+    return view('pages.about');
+    // return "<h1>Welcome To About Page</H1>";
 })->name('about');
 
 
@@ -62,4 +62,61 @@ Route::prefix('page')->group(function (){
 
 Route::fallback(function(){
     return "<h1>Page Not Found</h1>";
+});
+
+
+Route::get('/home',function(){
+    return view('pages.home');
+});
+
+
+// l-10
+
+Route::prefix('l10')->group(function(){
+
+    Route::get('/home',function(){
+        return view('lec10.home');
+    });
+    
+    Route::get('/about',function(){
+        return view('lec10.about');
+    });
+    
+    Route::get('/contact',function(){
+        return view('lec10.contact');
+    });
+    
+});
+
+// l-11
+
+
+Route::prefix('l11')->group(function(){
+
+    Route::get('/',function(){
+        return view('lec11.welcome');
+    });
+
+    Route::get('/test',function(){
+        return view('lec11.test');
+    });
+});
+
+
+// l-12
+
+Route::prefix('l12')->group(function(){
+
+    Route::get('/user',function(){
+        // $users = ['user'=>'jhon deo'];
+        // return view('lec12.user',$users);
+
+        // return view('lec12.user')
+        // ->with('user','jhon')
+        // ->with('city','nyc');
+
+        return view('lec12.user')->withUser('jhon')->withCity('nyc');
+    });
+   
+    
 });
