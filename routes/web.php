@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\TestController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -111,12 +113,36 @@ Route::prefix('l12')->group(function(){
         // $users = ['user'=>'jhon deo'];
         // return view('lec12.user',$users);
 
-        // return view('lec12.user')
-        // ->with('user','jhon')
-        // ->with('city','nyc');
+        return view('lec12.user')
+        ->with('user','jhon')
+        ->with('city','nyc');
 
-        return view('lec12.user')->withUser('jhon')->withCity('nyc');
-    });
-   
-    
+        // return view('lec12.user')->withUser('jhon')->withCity('nyc');
+    }); 
 });
+
+
+// l13
+
+// Route::prefix('l13')->group(function(){
+//     Route::get('/',[PageController::class,'showHome'])->name('home'); 
+//     Route::get('/blog',[PageController::class,'showBlog'])->name('blog'); 
+//     Route::get('/user/{id}',[PageController::class,'showUser'])->name('users'); 
+// });
+
+
+Route::prefix('l13')->group(function(){
+    Route::controller(PageController::class)->group(function(){ 
+        Route::get('/','showHome')->name('home'); 
+        Route::get('/blog','showBlog')->name('blog'); 
+        Route::get('/user/{id}','showUser')->name('users'); 
+        
+    });
+
+        Route::get('/test',TestController::class)->name('test'); 
+
+
+});
+
+
+
