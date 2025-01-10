@@ -14,16 +14,16 @@ class NewStudentSeeder extends Seeder
     public function run(): void
     {
 
-        $json  = File::get(path:'database/json/new_student.json');
+        // $json  = File::get(path:'database/json/new_student.json');
 
-        $students = collect(json_decode($json));
+        // $students = collect(json_decode($json));
 
-        $students->each(function($student){
-            new_student::create([
-                'name'=>$student->name,
-                'email'=>$student->email
-            ]);
-        });
+        // $students->each(function($student){
+        //     new_student::create([
+        //         'name'=>$student->name,
+        //         'email'=>$student->email
+        //     ]);
+        // });
 
 
         // $students = collect([
@@ -48,5 +48,8 @@ class NewStudentSeeder extends Seeder
         // $students->each(function($student){
         //     new_student::insert($student);
         // });
+
+        new_student::factory()->count(11)->create();
+
     }
 }
