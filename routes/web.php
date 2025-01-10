@@ -140,8 +140,6 @@ Route::prefix('l13')->group(function(){
     });
 
         Route::get('/test',TestController::class)->name('test'); 
-
-
 });
 
 
