@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -140,8 +141,17 @@ Route::prefix('l13')->group(function(){
     });
 
         Route::get('/test',TestController::class)->name('test'); 
+});
 
-
+Route::prefix('l19')->group(function(){
+    Route::controller(UserController::class)->group(function(){ 
+        Route::get('/','showUsers'); 
+        Route::get('/user/{id}','getUser')->name('view.user'); 
+        Route::get('/add','insertUser')->name('view.user'); 
+        Route::get('/delete','deleteUser')->name('view.user'); 
+        Route::get('/update/{id}','updateUser')->name('view.user');
+    });
+    
 });
 
 
