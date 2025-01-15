@@ -100,27 +100,94 @@ class UserController extends Controller
 
     }
 
-    public function updateUser(int $id){
-       $user=  DB::table('users')
-        ->where('id',$id)
-        ->update([
-            'address'=>'india, gujrat'
-        ]);
+    // public function updateUser(int $id){
+    //    $user=  DB::table('users')
+    //     ->where('id',$id)
+    //     ->update([
+    //         'address'=>'india, gujrat'
+    //     ]);
 
+    //     if($user){
+    //         echo "<h1>Data Added</h1>";
+    //     }else{
+    //         echo dump($user);
+    //     }
+    // }
+
+    // public function deleteUser(){
+    //    $user =  DB::table('users')
+    //     ->where('id',6)
+    //     ->delete();
+
+    //     if($user){
+    //         echo "<h1>Data Delete</h1>";
+    //     }
+    // }
+
+
+    public function showData(){
+
+        $users = DB::table('users')
+        ->orderBy('id')
+        // ->simplePaginate(10);
+        // ->paginate(10);
+        // ->appends(['sort'=>'name']);
+        ->cursorPaginate(10);
+        return view('lec20.Home',['users'=>$users]);
+    }
+
+    public function readUser(string $id){
+        $user = DB::table('users')->find($id);
+        return view('lec20.user_details',['data'=>$user]);
+    }
+
+    public function createUser(Request $req){
+        $user = DB::table('users')
+                    ->insertOrIgnore([
+                        [
+                        'name'=>$req->name,
+                        'email'=>$req->email,
+                        'city'=>$req->city,
+                        'age'=>$req->age,
+                        'password'=>'1234-1234',
+                        'phone'=>$req->phone,
+                        'address'=>$req->address,
+                        'created_at'=>now(),
+                        'updated_at'=>now(),
+                        ]
+                    ]);
+                    
         if($user){
-            echo "<h1>Data Added</h1>";
-        }else{
-            echo dump($user);
+           return redirect()->route('user.home');
         }
     }
 
-    public function deleteUser(){
+    public function editUser(string $id){
+        $user = DB::table('users')->find($id);
+        return view('lec20.updateuser',['user'=>$user]);
+    }
+    public function updateUser(Request $req){
+       $user=  DB::table('users')
+        ->where('id',$req->id)
+        ->update([
+            'name'=>$req->name
+        ]);
+
+        if($user){
+            return redirect()->route('user.home');
+        }else{
+            echo dump($user);
+        }
+
+    }
+
+    public function deleteUser(string $id){
        $user =  DB::table('users')
-        ->where('id',6)
+        ->where('id',$id)
         ->delete();
 
         if($user){
-            echo "<h1>Data Delete</h1>";
+            return redirect()->route('user.home');
         }
     }
 }
