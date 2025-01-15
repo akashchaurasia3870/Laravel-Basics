@@ -155,4 +155,24 @@ Route::prefix('l19')->group(function(){
 });
 
 
+Route::prefix('lec20')->group(function(){
+    Route::controller(UserController::class)->group(
+        function(){
+            Route::get('/','showData')->name('user.home');
+            
+            Route::get('/read_user/{id}','readUser')->name('user.read');
+
+            Route::delete('/delete_user/{id}','deleteUser')->name('user.delete');
+
+            Route::get('/adduser',function(){
+                return view('lec20.adduser');
+            })->name('user.view');
+            Route::post('/create_user','createUser')->name('user.create');
+
+            Route::get('/edituser/{id}','editUser')->name('user.edit');
+            Route::post('/update_user','updateUser')->name('user.update');
+        }
+    );
+});
+
 
