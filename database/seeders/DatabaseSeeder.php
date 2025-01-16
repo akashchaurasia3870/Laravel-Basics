@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         // new_student::factory()->count(11)->create();
         $this->call([
             UserSeeder::class,
+            StudentSeeder::class,
+            CitieSeeder::class
         ]);
     }
 }
