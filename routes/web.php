@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 
@@ -171,6 +172,14 @@ Route::prefix('lec20')->group(function(){
 
             Route::get('/edituser/{id}','editUser')->name('user.edit');
             Route::post('/update_user','updateUser')->name('user.update');
+        }
+    );
+});
+
+Route::prefix('lec21')->group(function(){
+    Route::controller(StudentController::class)->group(
+        function(){
+            Route::get('/','showStudent')->name('student.home');
         }
     );
 });
