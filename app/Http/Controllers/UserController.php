@@ -142,6 +142,13 @@ class UserController extends Controller
     }
 
     public function createUser(Request $req){
+
+        $req->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+        ]);
+        return $req->all();
+
         $user = DB::table('users')
                     ->insertOrIgnore([
                         [

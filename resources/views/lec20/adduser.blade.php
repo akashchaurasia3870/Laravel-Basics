@@ -13,6 +13,11 @@
     <h1 class="text-2xl font-bold mb-6">Create New User</h1>
 
     <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <pre>
+        @php
+            print_r($errors->all());
+        @endphp
+        </pre>
         <form action="{{ route('user.create') }}" method="POST">
             @csrf
             <div class="mb-4">

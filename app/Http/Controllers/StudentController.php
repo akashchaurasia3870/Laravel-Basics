@@ -38,4 +38,15 @@ class StudentController extends Controller
                     });
         return $students;
     }
+
+    public function rowSQLMethod(){
+        $students = DB::select("select * from studets");
+        // $students = DB::select("select * from studets where id = ?",[3]);
+        // $students = DB::insert("insert into students (name,age,rollno) values(?,?,?)",['jhon',21,21]);
+        // $students = DB::update("update students set email='jhon@jhon.com' where id = ?",[21]);
+        // $students = DB::delete("delete from students where id = ?",[21]);
+        return $students;
+    }
+
+
 }
