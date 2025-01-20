@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Rules\UpperCase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -141,13 +143,15 @@ class UserController extends Controller
         return view('lec20.user_details',['data'=>$user]);
     }
 
-    public function createUser(Request $req){
+    public function createUser(UserRequest $req){
 
         $req->validate([
-            'name'=>'required',
+            'name'=>['required',new UpperCase],
             'email'=>'required|email',
         ]);
-        return $req->all();
+        // return $req->all();
+        // return $req->only(['userpass','usercity']);
+        // return $req->except(['userpass','usercity']);
 
         $user = DB::table('users')
                     ->insertOrIgnore([
