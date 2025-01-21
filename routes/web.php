@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\CustomerCommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -185,3 +187,12 @@ Route::prefix('lec21')->group(function(){
 });
 
 
+Route::resource('customers',CustomerController::class)
+->names([
+    'create'=>'customers.build',
+    'show'=>'customers.view',
+]);
+// ->only(['create','update','show']);
+// ->except(['create','update','show']);
+
+Route::resource('customers.comments',CustomerCommentController::class)->shallow();
