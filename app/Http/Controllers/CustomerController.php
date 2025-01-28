@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
+use App\Models\student;
 
 class CustomerController extends Controller
 {
@@ -11,7 +13,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        echo "Customers Details";
+        $users = student::all();
+        return $users;
     }
 
     /**
@@ -47,6 +50,8 @@ class CustomerController extends Controller
     public function edit(string $id)
     {
         echo "Edit Customers Details $id";
+        $users = student::find($id);
+        return $users;
 
     }
 
@@ -56,7 +61,6 @@ class CustomerController extends Controller
     public function update(Request $request, string $id)
     {
         echo "Update Customers Details";
-
     }
 
     /**
